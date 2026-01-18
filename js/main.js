@@ -209,7 +209,8 @@
             const title = item.querySelector('.photo-title');
             const location = item.querySelector('.photo-location');
 
-            lightboxImage.src = img.src;
+            // Use full resolution image if available, otherwise fall back to thumbnail
+            lightboxImage.src = img.dataset.fullSrc || img.src;
             lightboxImage.alt = img.alt;
             lightboxTitle.textContent = title ? title.textContent : '';
             lightboxLocation.textContent = location ? location.textContent : '';

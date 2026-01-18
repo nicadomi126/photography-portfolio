@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallpaper | Henry Solórzano</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        .wallpaper-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 32px;
+            padding: 0 var(--spacing-lg) var(--spacing-xl);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .wallpaper-item {
+            position: relative;
+            overflow: visible;
+            aspect-ratio: 1 / 1;
+            transition: transform 0.15s ease-out, z-index 0s;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .wallpaper-item:hover {
+            z-index: 100;
+        }
+
+        .wallpaper-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 2px;
+            transition: transform 0.15s ease-out;
+            transform-origin: center center;
+        }
+
+        /* Responsive grid */
+        @media (max-width: 1600px) {
+            .wallpaper-grid {
+                grid-template-columns: repeat(8, 1fr);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .wallpaper-grid {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 24px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .wallpaper-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .wallpaper-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .wallpaper-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body class="collection-page">
+    <!-- Header -->
+    <header class="site-header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">Henry Solórzano</a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+                <span class="menu-icon"></span>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="other-collections.html">Collections</a>
+                <a href="https://henrysolorzano.substack.com/" target="_blank" rel="noopener">Journal</a>
+                <a href="moment.html">Moment</a>
+                <a href="about.html">About</a>
+                <a href="https://www.instagram.com/instagramfiction" target="_blank" rel="noopener" class="nav-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Page Header -->
+    <section class="collection-header">
+        <div class="collection-header-content">
+            <a href="index.html" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <line x1="19" y1="12" x2="5" y2="12"/>
+                    <polyline points="12 19 5 12 12 5"/>
+                </svg>
+                Back to Home
+            </a>
+            <h1 class="page-title">Wallpaper</h1>
+            <p class="collection-intro">
+                A mosaic of moments. Hover to explore, click to view full size.
+            </p>
+        </div>
+    </section>
+
+    <!-- Wallpaper Grid -->
+    <main class="wallpaper-grid" id="wallpaperGrid">
+        <!-- Images will be loaded dynamically -->
+    </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polyline points="15 18 9 12 15 6"/>
+            </svg>
+        </button>
+        <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polyline points="9 18 15 12 9 6"/>
+            </svg>
+        </button>
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-image" id="lightboxImage">
+            <div class="lightbox-info">
+                <span class="lightbox-counter" id="lightboxCounter"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <span>&copy; 2026 Henry Solórzano. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+    (function() {
+        'use strict';
+
+        // Thumbnail images (resized) and their full-size originals - newest first
+        const imageData = [
+            // January 2026 - GRFC
+            { thumb: 'images/grid photos/202601GRFC-01.jpeg', full: 'images/202601GRFC/202601GRFC-01.jpeg' },
+            { thumb: 'images/grid photos/202601GRFC-02.jpeg', full: 'images/202601GRFC/202601GRFC-02.jpeg' },
+            { thumb: 'images/grid photos/202601GRFC-03.jpeg', full: 'images/202601GRFC/202601GRFC-03.jpeg' },
+            { thumb: 'images/grid photos/202601GRFC-04.jpeg', full: 'images/202601GRFC/202601GRFC-04.jpeg' },
+            { thumb: 'images/grid photos/202601GRFC-05.jpeg', full: 'images/202601GRFC/202601GRFC-05.jpeg' },
+            { thumb: 'images/grid photos/202601GRFC-06.jpeg', full: 'images/202601GRFC/202601GRFC-06.jpeg' },
+            { thumb: 'images/grid photos/202601GRFC-07.jpeg', full: 'images/202601GRFC/202601GRFC-07.jpeg' },
+            { thumb: 'images/grid photos/202601GRFC-08.jpeg', full: 'images/202601GRFC/202601GRFC-08.jpeg' },
+            { thumb: 'images/grid photos/202601GRFC-09.jpeg', full: 'images/202601GRFC/202601GRFC-09.jpeg' },
+            { thumb: 'images/grid photos/202601GRFC-10.jpeg', full: 'images/202601GRFC/202601GRFC-10.jpeg' },
+            { thumb: 'images/grid photos/202601GRFC-11.jpeg', full: 'images/202601GRFC/202601GRFC-11.jpeg' },
+            { thumb: 'images/grid photos/202601GRFC-12.jpeg', full: 'images/202601GRFC/202601GRFC-12.jpeg' },
+            // October 2025 - Japan
+            { thumb: 'images/grid photos/202510Japan-01.jpeg', full: 'images/202510Japan/202510Japan-01.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-02.jpeg', full: 'images/202510Japan/202510Japan-02.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-03.jpeg', full: 'images/202510Japan/202510Japan-03.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-04.jpeg', full: 'images/202510Japan/202510Japan-04.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-05.jpeg', full: 'images/202510Japan/202510Japan-05.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-06.jpeg', full: 'images/202510Japan/202510Japan-06.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-07.jpeg', full: 'images/202510Japan/202510Japan-07.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-08.jpeg', full: 'images/202510Japan/202510Japan-08.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-09.jpeg', full: 'images/202510Japan/202510Japan-09.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-10.jpeg', full: 'images/202510Japan/202510Japan-10.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-11.jpeg', full: 'images/202510Japan/202510Japan-11.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-12.jpeg', full: 'images/202510Japan/202510Japan-12.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-13.jpeg', full: 'images/202510Japan/202510Japan-13.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-14.jpeg', full: 'images/202510Japan/202510Japan-14.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-15.jpeg', full: 'images/202510Japan/202510Japan-15.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-16.jpeg', full: 'images/202510Japan/202510Japan-16.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-17.jpeg', full: 'images/202510Japan/202510Japan-17.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-18.jpeg', full: 'images/202510Japan/202510Japan-18.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-19.jpeg', full: 'images/202510Japan/202510Japan-19.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-20.jpeg', full: 'images/202510Japan/202510Japan-20.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-21.jpeg', full: 'images/202510Japan/202510Japan-21.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-22.jpeg', full: 'images/202510Japan/202510Japan-22.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-23.jpeg', full: 'images/202510Japan/202510Japan-23.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-24.jpeg', full: 'images/202510Japan/202510Japan-24.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-25.jpeg', full: 'images/202510Japan/202510Japan-25.jpeg' },
+            { thumb: 'images/grid photos/202510Japan-26.jpeg', full: 'images/202510Japan/202510Japan-26.jpeg' },
+            // October 2025 - Following Japan
+            { thumb: 'images/grid photos/202510FollowingJapan-01.jpeg', full: 'images/202510FollowingJapan/202510FollowingJapan-01.jpeg' },
+            { thumb: 'images/grid photos/202510FollowingJapan-02.jpeg', full: 'images/202510FollowingJapan/202510FollowingJapan-02.jpeg' },
+            { thumb: 'images/grid photos/202510FollowingJapan-03.jpeg', full: 'images/202510FollowingJapan/202510FollowingJapan-03.jpeg' },
+            { thumb: 'images/grid photos/202510FollowingJapan-04.jpeg', full: 'images/202510FollowingJapan/202510FollowingJapan-04.jpeg' },
+            { thumb: 'images/grid photos/202510FollowingJapan-05.jpeg', full: 'images/202510FollowingJapan/202510FollowingJapan-05.jpeg' },
+            { thumb: 'images/grid photos/202510FollowingJapan-06.jpeg', full: 'images/202510FollowingJapan/202510FollowingJapan-06.jpeg' },
+            { thumb: 'images/grid photos/202510FollowingJapan-07.jpeg', full: 'images/202510FollowingJapan/202510FollowingJapan-07.jpeg' },
+            // June 2025 - Summer in NYC
+            { thumb: 'images/grid photos/202506SummerInNYC-01.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-01.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-02.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-02.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-03.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-03.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-04.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-04.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-05.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-05.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-06.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-06.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-07.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-07.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-08.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-08.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-09.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-09.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-10.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-10.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-11.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-11.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-12.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-12.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-13.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-13.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-14.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-14.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-15.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-15.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-16.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-16.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-17.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-17.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-18.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-18.jpeg' },
+            { thumb: 'images/grid photos/202506SummerInNYC-19.jpeg', full: 'images/202506SummerInNYC/202506SummerInNYC-19.jpeg' },
+            // June 2025 - Bench Sitting
+            { thumb: 'images/grid photos/202506BenchSitting-01.jpeg', full: 'images/202506BenchSitting/202506BenchSitting-01.jpeg' },
+            { thumb: 'images/grid photos/202506BenchSitting-02.jpeg', full: 'images/202506BenchSitting/202506BenchSitting-02.jpeg' },
+            { thumb: 'images/grid photos/202506BenchSitting-03.jpeg', full: 'images/202506BenchSitting/202506BenchSitting-03.jpeg' },
+            { thumb: 'images/grid photos/202506BenchSitting-04.jpeg', full: 'images/202506BenchSitting/202506BenchSitting-04.jpeg' },
+            { thumb: 'images/grid photos/202506BenchSitting-05.jpeg', full: 'images/202506BenchSitting/202506BenchSitting-05.jpeg' },
+            { thumb: 'images/grid photos/202506BenchSitting-06.jpeg', full: 'images/202506BenchSitting/202506BenchSitting-06.jpeg' },
+            { thumb: 'images/grid photos/202506BenchSitting-07.jpeg', full: 'images/202506BenchSitting/202506BenchSitting-07.jpeg' },
+            // April 2025 - Streets of Reykjavik
+            { thumb: 'images/grid photos/202504StreetsOfReykjavik-01.jpeg', full: 'images/202504StreetsOfReykjavik/202504StreetsOfReykjavik-01.jpeg' },
+            { thumb: 'images/grid photos/202504StreetsOfReykjavik-02.jpeg', full: 'images/202504StreetsOfReykjavik/202504StreetsOfReykjavik-02.jpeg' },
+            { thumb: 'images/grid photos/202504StreetsOfReykjavik-03.jpeg', full: 'images/202504StreetsOfReykjavik/202504StreetsOfReykjavik-03.jpeg' },
+            { thumb: 'images/grid photos/202504StreetsOfReykjavik-04.jpeg', full: 'images/202504StreetsOfReykjavik/202504StreetsOfReykjavik-04.jpeg' },
+            { thumb: 'images/grid photos/202504StreetsOfReykjavik-05.jpeg', full: 'images/202504StreetsOfReykjavik/202504StreetsOfReykjavik-05.jpeg' },
+            { thumb: 'images/grid photos/202504StreetsOfReykjavik-06.jpeg', full: 'images/202504StreetsOfReykjavik/202504StreetsOfReykjavik-06.jpeg' },
+            { thumb: 'images/grid photos/202504StreetsOfReykjavik-07.jpeg', full: 'images/202504StreetsOfReykjavik/202504StreetsOfReykjavik-07.jpeg' },
+            { thumb: 'images/grid photos/202504StreetsOfReykjavik-08.jpeg', full: 'images/202504StreetsOfReykjavik/202504StreetsOfReykjavik-08.jpeg' },
+            { thumb: 'images/grid photos/202504StreetsOfReykjavik-09.jpeg', full: 'images/202504StreetsOfReykjavik/202504StreetsOfReykjavik-09.jpeg' },
+            { thumb: 'images/grid photos/202504StreetsOfReykjavik-10.jpeg', full: 'images/202504StreetsOfReykjavik/202504StreetsOfReykjavik-10.jpeg' },
+            { thumb: 'images/grid photos/202504StreetsOfReykjavik-11.jpeg', full: 'images/202504StreetsOfReykjavik/202504StreetsOfReykjavik-11.jpeg' },
+            { thumb: 'images/grid photos/202504StreetsOfReykjavik-12.jpeg', full: 'images/202504StreetsOfReykjavik/202504StreetsOfReykjavik-12.jpeg' },
+            { thumb: 'images/grid photos/202504StreetsOfReykjavik-13.jpeg', full: 'images/202504StreetsOfReykjavik/202504StreetsOfReykjavik-13.jpeg' },
+            { thumb: 'images/grid photos/202504StreetsOfReykjavik-14.jpeg', full: 'images/202504StreetsOfReykjavik/202504StreetsOfReykjavik-14.jpeg' },
+            { thumb: 'images/grid photos/202504StreetsOfReykjavik-15.jpeg', full: 'images/202504StreetsOfReykjavik/202504StreetsOfReykjavik-15.jpeg' },
+            { thumb: 'images/grid photos/202504StreetsOfReykjavik-16.jpeg', full: 'images/202504StreetsOfReykjavik/202504StreetsOfReykjavik-16.jpeg' },
+            { thumb: 'images/grid photos/202504StreetsOfReykjavik-17.jpeg', full: 'images/202504StreetsOfReykjavik/202504StreetsOfReykjavik-17.jpeg' },
+            // April 2025 - People in Iceland
+            { thumb: 'images/grid photos/202504PeopleInIceland-01.jpeg', full: 'images/202504PeopleInIceland/202504PeopleInIceland-01.jpeg' },
+            { thumb: 'images/grid photos/202504PeopleInIceland-02.jpeg', full: 'images/202504PeopleInIceland/202504PeopleInIceland-02.jpeg' },
+            { thumb: 'images/grid photos/202504PeopleInIceland-03.jpeg', full: 'images/202504PeopleInIceland/202504PeopleInIceland-03.jpeg' },
+            { thumb: 'images/grid photos/202504PeopleInIceland-04.jpeg', full: 'images/202504PeopleInIceland/202504PeopleInIceland-04.jpeg' },
+            { thumb: 'images/grid photos/202504PeopleInIceland-05.jpeg', full: 'images/202504PeopleInIceland/202504PeopleInIceland-05.jpeg' },
+            { thumb: 'images/grid photos/202504PeopleInIceland-06.jpeg', full: 'images/202504PeopleInIceland/202504PeopleInIceland-06.jpeg' },
+            { thumb: 'images/grid photos/202504PeopleInIceland-07.jpeg', full: 'images/202504PeopleInIceland/202504PeopleInIceland-07.jpeg' },
+            { thumb: 'images/grid photos/202504PeopleInIceland-08.jpeg', full: 'images/202504PeopleInIceland/202504PeopleInIceland-08.jpeg' },
+            { thumb: 'images/grid photos/202504PeopleInIceland-09.jpeg', full: 'images/202504PeopleInIceland/202504PeopleInIceland-09.jpeg' },
+            // January 2025 - Haystack Rock
+            { thumb: 'images/grid photos/202501HaystackRock-01.jpeg', full: 'images/202501HaystackRock/202501HaystackRock-01.jpeg' },
+            { thumb: 'images/grid photos/202501HaystackRock-02.jpeg', full: 'images/202501HaystackRock/202501HaystackRock-02.jpeg' },
+            { thumb: 'images/grid photos/202501HaystackRock-03.jpeg', full: 'images/202501HaystackRock/202501HaystackRock-03.jpeg' },
+            { thumb: 'images/grid photos/202501HaystackRock-04.jpeg', full: 'images/202501HaystackRock/202501HaystackRock-04.jpeg' },
+            { thumb: 'images/grid photos/202501HaystackRock-05.jpeg', full: 'images/202501HaystackRock/202501HaystackRock-05.jpeg' },
+            { thumb: 'images/grid photos/202501HaystackRock-06.jpeg', full: 'images/202501HaystackRock/202501HaystackRock-06.jpeg' },
+            { thumb: 'images/grid photos/202501HaystackRock-07.jpeg', full: 'images/202501HaystackRock/202501HaystackRock-07.jpeg' },
+            { thumb: 'images/grid photos/202501HaystackRock-08.jpeg', full: 'images/202501HaystackRock/202501HaystackRock-08.jpeg' },
+            { thumb: 'images/grid photos/202501HaystackRock-09.jpeg', full: 'images/202501HaystackRock/202501HaystackRock-09.jpeg' },
+            { thumb: 'images/grid photos/202501HaystackRock-10.jpeg', full: 'images/202501HaystackRock/202501HaystackRock-10.jpeg' },
+            { thumb: 'images/grid photos/202501HaystackRock-11.jpeg', full: 'images/202501HaystackRock/202501HaystackRock-11.jpeg' },
+            { thumb: 'images/grid photos/202501HaystackRock-12.jpeg', full: 'images/202501HaystackRock/202501HaystackRock-12.jpeg' },
+            // December 2024 - Santo Domingo II
+            { thumb: 'images/grid photos/202412SantoDomingo2-01.jpeg', full: 'images/202412SantoDomingo2/202412SantoDomingo2-01.jpeg' },
+            { thumb: 'images/grid photos/202412SantoDomingo2-02.jpeg', full: 'images/202412SantoDomingo2/202412SantoDomingo2-02.jpeg' },
+            { thumb: 'images/grid photos/202412SantoDomingo2-03.jpeg', full: 'images/202412SantoDomingo2/202412SantoDomingo2-03.jpeg' },
+            { thumb: 'images/grid photos/202412SantoDomingo2-04.jpeg', full: 'images/202412SantoDomingo2/202412SantoDomingo2-04.jpeg' },
+            { thumb: 'images/grid photos/202412SantoDomingo2-05.jpeg', full: 'images/202412SantoDomingo2/202412SantoDomingo2-05.jpeg' },
+            { thumb: 'images/grid photos/202412SantoDomingo2-06.jpeg', full: 'images/202412SantoDomingo2/202412SantoDomingo2-06.jpeg' },
+            { thumb: 'images/grid photos/202412SantoDomingo2-07.jpeg', full: 'images/202412SantoDomingo2/202412SantoDomingo2-07.jpeg' },
+            { thumb: 'images/grid photos/202412SantoDomingo2-08.jpeg', full: 'images/202412SantoDomingo2/202412SantoDomingo2-08.jpeg' },
+            { thumb: 'images/grid photos/202412SantoDomingo2-09.jpeg', full: 'images/202412SantoDomingo2/202412SantoDomingo2-09.jpeg' },
+            // December 2024 - Santo Domingo I
+            { thumb: 'images/grid photos/202412SantoDomingo1-01.jpeg', full: 'images/202412SantoDomingo1/202412SantoDomingo1-01.jpeg' },
+            { thumb: 'images/grid photos/202412SantoDomingo1-02.jpeg', full: 'images/202412SantoDomingo1/202412SantoDomingo1-02.jpeg' },
+            { thumb: 'images/grid photos/202412SantoDomingo1-03.jpeg', full: 'images/202412SantoDomingo1/202412SantoDomingo1-03.jpeg' },
+            { thumb: 'images/grid photos/202412SantoDomingo1-04.jpeg', full: 'images/202412SantoDomingo1/202412SantoDomingo1-04.jpeg' },
+            { thumb: 'images/grid photos/202412SantoDomingo1-05.jpeg', full: 'images/202412SantoDomingo1/202412SantoDomingo1-05.jpeg' },
+            { thumb: 'images/grid photos/202412SantoDomingo1-06.jpeg', full: 'images/202412SantoDomingo1/202412SantoDomingo1-06.jpeg' },
+            { thumb: 'images/grid photos/202412SantoDomingo1-07.jpeg', full: 'images/202412SantoDomingo1/202412SantoDomingo1-07.jpeg' },
+            { thumb: 'images/grid photos/202412SantoDomingo1-08.jpeg', full: 'images/202412SantoDomingo1/202412SantoDomingo1-08.jpeg' },
+            { thumb: 'images/grid photos/202412SantoDomingo1-09.jpeg', full: 'images/202412SantoDomingo1/202412SantoDomingo1-09.jpeg' },
+            // November 2024 - Downtown Durham
+            { thumb: 'images/grid photos/202411DowntownDurham-01.jpeg', full: 'images/202411DowntownDurham/202411DowntownDurham-01.jpeg' },
+            { thumb: 'images/grid photos/202411DowntownDurham-02.jpeg', full: 'images/202411DowntownDurham/202411DowntownDurham-02.jpeg' },
+            { thumb: 'images/grid photos/202411DowntownDurham-03.jpeg', full: 'images/202411DowntownDurham/202411DowntownDurham-03.jpeg' },
+            { thumb: 'images/grid photos/202411DowntownDurham-04.jpeg', full: 'images/202411DowntownDurham/202411DowntownDurham-04.jpeg' },
+            { thumb: 'images/grid photos/202411DowntownDurham-05.jpeg', full: 'images/202411DowntownDurham/202411DowntownDurham-05.jpeg' },
+            { thumb: 'images/grid photos/202411DowntownDurham-06.jpeg', full: 'images/202411DowntownDurham/202411DowntownDurham-06.jpeg' },
+            { thumb: 'images/grid photos/202411DowntownDurham-07.jpeg', full: 'images/202411DowntownDurham/202411DowntownDurham-07.jpeg' },
+            { thumb: 'images/grid photos/202411DowntownDurham-08.jpeg', full: 'images/202411DowntownDurham/202411DowntownDurham-08.jpeg' },
+            // September 2024 - NC Folk Festival
+            { thumb: 'images/grid photos/202409NCFolkFestival-01.jpeg', full: 'images/202409NCFolkFestival/202409NCFolkFestival-01.jpeg' },
+            { thumb: 'images/grid photos/202409NCFolkFestival-02.jpeg', full: 'images/202409NCFolkFestival/202409NCFolkFestival-02.jpeg' },
+            { thumb: 'images/grid photos/202409NCFolkFestival-03.jpeg', full: 'images/202409NCFolkFestival/202409NCFolkFestival-03.jpeg' },
+            { thumb: 'images/grid photos/202409NCFolkFestival-04.jpeg', full: 'images/202409NCFolkFestival/202409NCFolkFestival-04.jpeg' },
+            { thumb: 'images/grid photos/202409NCFolkFestival-05.jpeg', full: 'images/202409NCFolkFestival/202409NCFolkFestival-05.jpeg' },
+            { thumb: 'images/grid photos/202409NCFolkFestival-06.jpeg', full: 'images/202409NCFolkFestival/202409NCFolkFestival-06.jpeg' },
+            { thumb: 'images/grid photos/202409NCFolkFestival-07.jpeg', full: 'images/202409NCFolkFestival/202409NCFolkFestival-07.jpeg' },
+            { thumb: 'images/grid photos/202409NCFolkFestival-08.jpeg', full: 'images/202409NCFolkFestival/202409NCFolkFestival-08.jpeg' },
+            { thumb: 'images/grid photos/202409NCFolkFestival-09.jpeg', full: 'images/202409NCFolkFestival/202409NCFolkFestival-09.jpeg' },
+            { thumb: 'images/grid photos/202409NCFolkFestival-10.jpeg', full: 'images/202409NCFolkFestival/202409NCFolkFestival-10.jpeg' },
+            // August 2024 - Cincinnati/Cleveland
+            { thumb: 'images/grid photos/202408Cincinnati-01.jpeg', full: 'images/202408Cincinnati/202408Cincinnati-01.jpeg' },
+            { thumb: 'images/grid photos/202408Cincinnati-02.jpeg', full: 'images/202408Cincinnati/202408Cincinnati-02.jpeg' },
+            { thumb: 'images/grid photos/202408Cincinnati-03.jpeg', full: 'images/202408Cincinnati/202408Cincinnati-03.jpeg' },
+            // July 2024 - Washington DC
+            { thumb: 'images/grid photos/202407WashingtonDC-01.jpeg', full: 'images/202407WashingtonDC/202407WashingtonDC-01.jpeg' },
+            { thumb: 'images/grid photos/202407WashingtonDC-02.jpeg', full: 'images/202407WashingtonDC/202407WashingtonDC-02.jpeg' },
+            { thumb: 'images/grid photos/202407WashingtonDC-03.jpeg', full: 'images/202407WashingtonDC/202407WashingtonDC-03.jpeg' },
+            { thumb: 'images/grid photos/202407WashingtonDC-04.jpeg', full: 'images/202407WashingtonDC/202407WashingtonDC-04.jpeg' },
+            { thumb: 'images/grid photos/202407WashingtonDC-05.jpeg', full: 'images/202407WashingtonDC/202407WashingtonDC-05.jpeg' },
+            { thumb: 'images/grid photos/202407WashingtonDC-06.jpeg', full: 'images/202407WashingtonDC/202407WashingtonDC-06.jpeg' },
+            { thumb: 'images/grid photos/202407WashingtonDC-07.jpeg', full: 'images/202407WashingtonDC/202407WashingtonDC-07.jpeg' },
+            { thumb: 'images/grid photos/202407WashingtonDC-08.jpeg', full: 'images/202407WashingtonDC/202407WashingtonDC-08.jpeg' },
+            { thumb: 'images/grid photos/202407WashingtonDC-09.jpeg', full: 'images/202407WashingtonDC/202407WashingtonDC-09.jpeg' },
+            { thumb: 'images/grid photos/202407WashingtonDC-10.jpeg', full: 'images/202407WashingtonDC/202407WashingtonDC-10.jpeg' },
+            // April 2024 - Montreal
+            { thumb: 'images/grid photos/202404Montreal-01.jpeg', full: 'images/202404Montreal/202404Montreal-01.jpeg' },
+            { thumb: 'images/grid photos/202404Montreal-02.jpeg', full: 'images/202404Montreal/202404Montreal-02.jpeg' },
+            { thumb: 'images/grid photos/202404Montreal-03.jpeg', full: 'images/202404Montreal/202404Montreal-03.jpeg' },
+            { thumb: 'images/grid photos/202404Montreal-04.jpeg', full: 'images/202404Montreal/202404Montreal-04.jpeg' },
+            { thumb: 'images/grid photos/202404Montreal-05.jpeg', full: 'images/202404Montreal/202404Montreal-05.jpeg' },
+            { thumb: 'images/grid photos/202404Montreal-06.jpeg', full: 'images/202404Montreal/202404Montreal-06.jpeg' },
+            { thumb: 'images/grid photos/202404Montreal-07.jpeg', full: 'images/202404Montreal/202404Montreal-07.jpeg' },
+            { thumb: 'images/grid photos/202404Montreal-08.jpeg', full: 'images/202404Montreal/202404Montreal-08.jpeg' }
+        ];
+
+        const grid = document.getElementById('wallpaperGrid');
+        const items = [];
+
+        // Lightbox elements
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxCounter = document.getElementById('lightboxCounter');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const lightboxPrev = document.getElementById('lightboxPrev');
+        const lightboxNext = document.getElementById('lightboxNext');
+        let currentIndex = 0;
+
+        // Create image elements
+        imageData.forEach((data, index) => {
+            const item = document.createElement('div');
+            item.className = 'wallpaper-item';
+            item.dataset.index = index;
+
+            const img = document.createElement('img');
+            img.src = data.thumb;
+            img.alt = 'Photo ' + (index + 1);
+            img.loading = 'lazy';
+
+            // Click to open lightbox
+            item.addEventListener('click', () => openLightbox(index));
+
+            item.appendChild(img);
+            grid.appendChild(item);
+            items.push({ element: item, img: img });
+        });
+
+        // Lightbox functions
+        function openLightbox(index) {
+            currentIndex = index;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            loadImage(index);
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function loadImage(index) {
+            const newImg = new Image();
+            newImg.onload = () => {
+                lightboxImage.src = imageData[index].full;
+            };
+            newImg.src = imageData[index].full;
+            lightboxCounter.textContent = `${index + 1} / ${imageData.length}`;
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % imageData.length;
+            loadImage(currentIndex);
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + imageData.length) % imageData.length;
+            loadImage(currentIndex);
+        }
+
+        // Event listeners
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxNext.addEventListener('click', nextImage);
+        lightboxPrev.addEventListener('click', prevImage);
+
+        // Click outside image to close
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') nextImage();
+            if (e.key === 'ArrowLeft') prevImage();
+        });
+
+        // Wave effect on mouse move
+        let mouseX = 0;
+        let mouseY = 0;
+        let rafId = null;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            if (!rafId) {
+                rafId = requestAnimationFrame(updateWave);
+            }
+        });
+
+        function updateWave() {
+            rafId = null;
+
+            items.forEach(({ element, img }) => {
+                const rect = element.getBoundingClientRect();
+                const itemCenterX = rect.left + rect.width / 2;
+                const itemCenterY = rect.top + rect.height / 2;
+
+                // Calculate distance from mouse to image center
+                const distX = mouseX - itemCenterX;
+                const distY = mouseY - itemCenterY;
+                const distance = Math.sqrt(distX * distX + distY * distY);
+
+                // Max effect radius (pixels)
+                const maxRadius = 300;
+
+                // Calculate scale based on distance (1x to 2x)
+                let scale = 1;
+                if (distance < maxRadius) {
+                    // Closer = bigger, using smooth easing
+                    const proximity = 1 - (distance / maxRadius);
+                    scale = 1 + (proximity * proximity * 1); // Max 2x scale
+                }
+
+                img.style.transform = `scale(${scale})`;
+            });
+        }
+
+        // Reset on mouse leave
+        document.addEventListener('mouseleave', () => {
+            items.forEach(({ img }) => {
+                img.style.transform = 'scale(1)';
+            });
+        });
+
+    })();
+    </script>
+</body>
+</html>

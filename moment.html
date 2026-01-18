@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moment | Henry Solórzano</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="moment-page">
+    <!-- Header (minimal, fades out) -->
+    <header class="site-header moment-header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">Henry Solórzano</a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+                <span class="menu-icon"></span>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="other-collections.html">Collections</a>
+                <a href="https://henrysolorzano.substack.com/" target="_blank" rel="noopener">Journal</a>
+                <a href="moment.html" class="active">Moment</a>
+                <a href="about.html">About</a>
+                <a href="https://www.instagram.com/instagramfiction" target="_blank" rel="noopener" class="nav-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Main Content -->
+    <main class="moment-container">
+        <!-- Intro Screen -->
+        <div class="moment-intro" id="momentIntro">
+            <div class="moment-intro-content">
+                <h1 class="moment-title">Take a Moment</h1>
+                <p class="moment-description">
+                    Pause. Breathe. Let a single image hold your attention for sixty seconds.
+                    No scrolling, no distractions — just you and the photograph.
+                </p>
+                <p class="moment-description moment-inspired">
+                    Inspired by <a href="https://www.nytimes.com/interactive/2024/07/20/upshot/attention-experiment.html" target="_blank" rel="noopener">"Test Your Focus: Can You Spend 10 Minutes With One Painting?"</a>
+                </p>
+                <button class="moment-start-btn" id="startMoment">
+                    Begin
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Photo Display -->
+        <div class="moment-display" id="momentDisplay">
+            <div class="moment-photo-container">
+                <img src="" alt="Random photograph" class="moment-photo" id="momentPhoto">
+            </div>
+
+            <!-- Timer (unobtrusive) -->
+            <div class="moment-timer" id="momentTimer">
+                <div class="timer-ring">
+                    <svg viewBox="0 0 100 100">
+                        <circle class="timer-ring-bg" cx="50" cy="50" r="45"/>
+                        <circle class="timer-ring-progress" cx="50" cy="50" r="45" id="timerProgress"/>
+                    </svg>
+                    <span class="timer-text" id="timerText">1:00</span>
+                </div>
+            </div>
+
+            <!-- Completion Message -->
+            <div class="moment-complete" id="momentComplete">
+                <p class="complete-message">Thank you for being present.</p>
+                <div class="complete-actions">
+                    <button class="moment-btn" id="anotherMoment">
+                        Another moment
+                    </button>
+                    <a href="index.html" class="moment-btn secondary">
+                        Explore collections
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+    (function() {
+        'use strict';
+
+        // Collection folders and their photo counts
+        const collections = [
+            { folder: '202409NCFolkFestival', prefix: '202409NCFolkFestival', count: 10 },
+            { folder: '202408Cincinnati', prefix: '202408Cincinnati', count: 3 },
+            { folder: '202407WashingtonDC', prefix: '202407WashingtonDC', count: 10 },
+            { folder: '202404Montreal', prefix: '202404Montreal', count: 8 },
+            { folder: '202510Japan', prefix: '202510Japan', count: 26 },
+            { folder: '202506SummerInNYC', prefix: '202506SummerInNYC', count: 19 },
+            { folder: '202504StreetsOfReykjavik', prefix: '202504StreetsOfReykjavik', count: 17 }
+        ];
+
+        // Build photo array from all collections
+        const photos = [];
+        collections.forEach(collection => {
+            for (let i = 1; i <= collection.count; i++) {
+                const num = i.toString().padStart(2, '0');
+                photos.push(`images/${collection.folder}/${collection.prefix}-${num}.jpeg`);
+            }
+        });
+
+        // DOM Elements
+        const intro = document.getElementById('momentIntro');
+        const display = document.getElementById('momentDisplay');
+        const photo = document.getElementById('momentPhoto');
+        const timerText = document.getElementById('timerText');
+        const timerProgress = document.getElementById('timerProgress');
+        const complete = document.getElementById('momentComplete');
+        const timer = document.getElementById('momentTimer');
+        const startBtn = document.getElementById('startMoment');
+        const anotherBtn = document.getElementById('anotherMoment');
+        const header = document.querySelector('.moment-header');
+
+        // Timer settings
+        const DURATION = 60; // seconds
+        let timeLeft = DURATION;
+        let timerInterval = null;
+
+        // Circle circumference for progress ring
+        const circumference = 2 * Math.PI * 45;
+        timerProgress.style.strokeDasharray = circumference;
+        timerProgress.style.strokeDashoffset = 0;
+
+        // Get random photo
+        const getRandomPhoto = () => {
+            const randomIndex = Math.floor(Math.random() * photos.length);
+            return photos[randomIndex];
+        };
+
+        // Format time as M:SS
+        const formatTime = (seconds) => {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        };
+
+        // Update timer display
+        const updateTimer = () => {
+            timeLeft--;
+            timerText.textContent = formatTime(timeLeft);
+
+            // Update progress ring
+            const progress = (DURATION - timeLeft) / DURATION;
+            timerProgress.style.strokeDashoffset = circumference * (1 - progress);
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                showComplete();
+            }
+        };
+
+        // Start the moment
+        const startMoment = () => {
+            // Load random photo
+            photo.src = getRandomPhoto();
+
+            // Transition to display
+            intro.classList.add('hidden');
+            display.classList.add('active');
+
+            // Fade out header after a moment
+            setTimeout(() => {
+                header.classList.add('faded');
+            }, 2000);
+
+            // Start timer after photo loads
+            photo.onload = () => {
+                setTimeout(() => {
+                    timer.classList.add('visible');
+                    timerInterval = setInterval(updateTimer, 1000);
+                }, 500);
+            };
+
+            // Fallback if image fails to load
+            photo.onerror = () => {
+                photo.src = 'images/202404Montreal/202404Montreal-01.jpeg'; // fallback image
+            };
+        };
+
+        // Show completion state
+        const showComplete = () => {
+            timer.classList.remove('visible');
+            timer.classList.add('complete');
+            complete.classList.add('visible');
+            header.classList.remove('faded');
+        };
+
+        // Reset for another moment
+        const resetMoment = () => {
+            timeLeft = DURATION;
+            timerText.textContent = formatTime(DURATION);
+            timerProgress.style.strokeDashoffset = 0;
+
+            complete.classList.remove('visible');
+            timer.classList.remove('complete');
+
+            // Load new photo and restart
+            photo.src = getRandomPhoto();
+            photo.onload = () => {
+                header.classList.add('faded');
+                setTimeout(() => {
+                    timer.classList.add('visible');
+                    timerInterval = setInterval(updateTimer, 1000);
+                }, 500);
+            };
+        };
+
+        // Event listeners
+        startBtn.addEventListener('click', startMoment);
+        anotherBtn.addEventListener('click', resetMoment);
+
+        // Keyboard shortcut: Space to start/restart
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                if (!display.classList.contains('active')) {
+                    startMoment();
+                } else if (complete.classList.contains('visible')) {
+                    resetMoment();
+                }
+            }
+        });
+
+    })();
+    </script>
+</body>
+</html>

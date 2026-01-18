@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal | Henry Solórzano</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="alternate" type="application/rss+xml" title="Journal RSS Feed" href="feed.xml">
+</head>
+<body class="blog-page">
+    <!-- Header -->
+    <header class="site-header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">Henry Solórzano</a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+                <span class="menu-icon"></span>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="other-collections.html">Collections</a>
+                <a href="blog.html" class="active">Journal</a>
+                <a href="moment.html">Moment</a>
+                <a href="about.html">About</a>
+                <a href="https://www.instagram.com/instagramfiction" target="_blank" rel="noopener" class="nav-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Blog Header -->
+    <section class="page-header">
+        <h1 class="page-title">Journal</h1>
+        <p class="page-subtitle">Stories behind the lens. Thoughts on light, moments, and the pursuit of the perfect frame.</p>
+        <a href="feed.xml" class="rss-link" title="Subscribe via RSS">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="6.18" cy="17.82" r="2.18"/>
+                <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+            </svg>
+            Subscribe
+        </a>
+    </section>
+
+    <!-- Blog Posts -->
+    <main class="blog-list">
+        <article class="blog-card featured">
+            <a href="blog-post.html" class="blog-card-link">
+                <div class="blog-card-image">
+                    <img src="images/blog/01.jpeg" alt="Blog post featured image">
+                </div>
+                <div class="blog-card-content">
+                    <span class="blog-card-date">December 15, 2024</span>
+                    <h2 class="blog-card-title">Chasing the Blue Hour in Tokyo</h2>
+                    <p class="blog-card-excerpt">
+                        There's a twenty-minute window after sunset when Tokyo transforms.
+                        The neon hasn't fully awakened, but the sky holds onto its last
+                        traces of deep blue. This is when I found the shot I'd been
+                        waiting three days to capture.
+                    </p>
+                    <span class="blog-card-read">Read Story</span>
+                </div>
+            </a>
+        </article>
+
+        <article class="blog-card">
+            <a href="blog-post.html" class="blog-card-link">
+                <div class="blog-card-image">
+                    <img src="images/blog/02.jpeg" alt="Blog post featured image">
+                </div>
+                <div class="blog-card-content">
+                    <span class="blog-card-date">November 28, 2024</span>
+                    <h2 class="blog-card-title">On Patience: Three Hours for One Frame</h2>
+                    <p class="blog-card-excerpt">
+                        The morning fog was supposed to lift at dawn. Instead, I waited
+                        in the cold, watching the landscape shift through invisible layers
+                        until the light finally broke through.
+                    </p>
+                    <span class="blog-card-read">Read Story</span>
+                </div>
+            </a>
+        </article>
+
+        <article class="blog-card">
+            <a href="blog-post.html" class="blog-card-link">
+                <div class="blog-card-image">
+                    <img src="images/blog/03.jpeg" alt="Blog post featured image">
+                </div>
+                <div class="blog-card-content">
+                    <span class="blog-card-date">October 12, 2024</span>
+                    <h2 class="blog-card-title">The Gear That Got Left Behind</h2>
+                    <p class="blog-card-excerpt">
+                        I used to carry 30 pounds of equipment. Now I travel with a single
+                        body and one lens. Here's how constraints became my greatest
+                        creative tool.
+                    </p>
+                    <span class="blog-card-read">Read Story</span>
+                </div>
+            </a>
+        </article>
+
+        <article class="blog-card">
+            <a href="blog-post.html" class="blog-card-link">
+                <div class="blog-card-image">
+                    <img src="images/blog/04.jpeg" alt="Blog post featured image">
+                </div>
+                <div class="blog-card-content">
+                    <span class="blog-card-date">September 5, 2024</span>
+                    <h2 class="blog-card-title">Portraits of Strangers: Building Trust in Seconds</h2>
+                    <p class="blog-card-excerpt">
+                        The best portraits happen when walls come down. I've learned that
+                        the camera is secondary to the human connection that makes someone
+                        truly present in front of the lens.
+                    </p>
+                    <span class="blog-card-read">Read Story</span>
+                </div>
+            </a>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <span>&copy; 2026 Henry Solórzano. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

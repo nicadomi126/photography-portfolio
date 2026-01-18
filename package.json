@@ -1,0 +1,12 @@
+{
+  "name": "photography-portfolio",
+  "version": "1.0.0",
+  "description": "Image optimization for photography portfolio",
+  "scripts": {
+    "optimize": "node scripts/optimize-images.js",
+    "optimize:dry": "node scripts/optimize-images.js --dry-run"
+  },
+  "dependencies": {
+    "sharp": "^0.33.2"
+  }
+}

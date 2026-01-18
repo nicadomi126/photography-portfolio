@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Your Name - Journal</title>
+    <link>https://yourwebsite.com/blog.html</link>
+    <description>Stories behind the lens. Thoughts on light, moments, and the pursuit of the perfect frame.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 15 Dec 2024 12:00:00 GMT</lastBuildDate>
+    <atom:link href="https://yourwebsite.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <image>
+      <url>https://yourwebsite.com/images/logo.png</url>
+      <title>Your Name - Journal</title>
+      <link>https://yourwebsite.com</link>
+    </image>
+
+    <item>
+      <title>Chasing the Blue Hour in Tokyo</title>
+      <link>https://yourwebsite.com/blog-post.html</link>
+      <guid isPermaLink="true">https://yourwebsite.com/blog-post.html</guid>
+      <pubDate>Sun, 15 Dec 2024 12:00:00 GMT</pubDate>
+      <description>There's a twenty-minute window after sunset when Tokyo transforms. The neon hasn't fully awakened, but the sky holds onto its last traces of deep blue. This is when I found the shot I'd been waiting three days to capture.</description>
+      <content:encoded><![CDATA[
+        <p>There's a twenty-minute window after sunset when Tokyo transforms. The neon hasn't fully awakened, but the sky holds onto its last traces of deep blue. This is when I found the shot I'd been waiting three days to capture.</p>
+        <p>I arrived in Tokyo with a specific vision: the intersection of old and new, captured in that fleeting moment when natural light surrenders to artificial. The problem with such specificity is that nature doesn't check your schedule.</p>
+      ]]></content:encoded>
+      <category>Urban</category>
+      <category>Tokyo</category>
+      <category>Blue Hour</category>
+    </item>
+
+    <item>
+      <title>On Patience: Three Hours for One Frame</title>
+      <link>https://yourwebsite.com/blog-post.html?id=patience</link>
+      <guid isPermaLink="true">https://yourwebsite.com/blog-post.html?id=patience</guid>
+      <pubDate>Thu, 28 Nov 2024 12:00:00 GMT</pubDate>
+      <description>The morning fog was supposed to lift at dawn. Instead, I waited in the cold, watching the landscape shift through invisible layers until the light finally broke through.</description>
+      <content:encoded><![CDATA[
+        <p>The morning fog was supposed to lift at dawn. Instead, I waited in the cold, watching the landscape shift through invisible layers until the light finally broke through.</p>
+      ]]></content:encoded>
+      <category>Landscape</category>
+      <category>Patience</category>
+    </item>
+
+    <item>
+      <title>The Gear That Got Left Behind</title>
+      <link>https://yourwebsite.com/blog-post.html?id=gear</link>
+      <guid isPermaLink="true">https://yourwebsite.com/blog-post.html?id=gear</guid>
+      <pubDate>Sat, 12 Oct 2024 12:00:00 GMT</pubDate>
+      <description>I used to carry 30 pounds of equipment. Now I travel with a single body and one lens. Here's how constraints became my greatest creative tool.</description>
+      <content:encoded><![CDATA[
+        <p>I used to carry 30 pounds of equipment. Now I travel with a single body and one lens. Here's how constraints became my greatest creative tool.</p>
+      ]]></content:encoded>
+      <category>Gear</category>
+      <category>Minimalism</category>
+    </item>
+
+    <item>
+      <title>Portraits of Strangers: Building Trust in Seconds</title>
+      <link>https://yourwebsite.com/blog-post.html?id=portraits</link>
+      <guid isPermaLink="true">https://yourwebsite.com/blog-post.html?id=portraits</guid>
+      <pubDate>Thu, 05 Sep 2024 12:00:00 GMT</pubDate>
+      <description>The best portraits happen when walls come down. I've learned that the camera is secondary to the human connection that makes someone truly present in front of the lens.</description>
+      <content:encoded><![CDATA[
+        <p>The best portraits happen when walls come down. I've learned that the camera is secondary to the human connection that makes someone truly present in front of the lens.</p>
+      ]]></content:encoded>
+      <category>Portraits</category>
+      <category>Street Photography</category>
+    </item>
+
+  </channel>
+</rss>

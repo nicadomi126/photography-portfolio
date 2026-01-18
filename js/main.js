@@ -399,25 +399,6 @@
             document.body.style.transition = 'opacity 0.6s ease';
             document.body.style.opacity = '1';
         });
-
-        // Fade out on navigation
-        document.querySelectorAll('a:not([target="_blank"])').forEach(link => {
-            link.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-
-                // Skip for anchor links, javascript:, and mailto:
-                if (!href || href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:')) {
-                    return;
-                }
-
-                e.preventDefault();
-                document.body.style.opacity = '0';
-
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 300);
-            });
-        });
     };
 
     // ========================

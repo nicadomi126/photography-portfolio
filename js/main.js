@@ -139,14 +139,14 @@
         const updateHeader = () => {
             const scrollY = window.scrollY;
             const isLight = document.body.classList.contains('light-mode');
-            const bgColor = isLight ? 'rgba(248, 248, 248, 0.95)' : 'rgba(10, 10, 10, 0.95)';
+            const bgColor = isLight ? '#f8f8f8' : 'rgba(10, 10, 10, 0.95)';
             const gradientBg = isLight
-                ? 'linear-gradient(to bottom, rgba(248, 248, 248, 0.95), transparent)'
+                ? '#f8f8f8'
                 : 'linear-gradient(to bottom, rgba(10, 10, 10, 0.95), transparent)';
 
             if (scrollY > 100) {
                 header.style.background = bgColor;
-                header.style.backdropFilter = 'blur(10px)';
+                header.style.backdropFilter = isLight ? 'none' : 'blur(10px)';
             } else {
                 header.style.background = gradientBg;
                 header.style.backdropFilter = 'none';

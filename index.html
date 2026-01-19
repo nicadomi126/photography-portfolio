@@ -13,7 +13,10 @@
     <!-- Splash Screen (first visit only) -->
     <div class="splash-screen" id="splashScreen">
         <img src="" alt="Welcome" class="splash-image" id="splashImage">
-        <span class="splash-logo">Henry Solórzano</span>
+        <div class="splash-intro" id="splashIntro">
+            <h1 class="splash-name">Henry Solórzano</h1>
+            <p class="splash-subtitle" id="splashSubtitle">Amateur Photographer</p>
+        </div>
     </div>
 
     <!-- Header -->
@@ -75,14 +78,13 @@
     <main class="journey">
         <h2 class="recent-collections-title" style="text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; margin: 4rem 0 0.5rem; letter-spacing: 0.02em;">Recent Collections</h2>
         <!-- Collection 1 -->
-        <section class="collection-section" data-collection="grfc">
+        <section class="collection-section" data-collection="giant-robot-fight-club">
             <div class="collection-content">
-                <span class="collection-number">01</span>
-                <h2 class="collection-title">GRFC</h2>
+                <h2 class="collection-title">Giant Robot Fight Club</h2>
                 <p class="collection-description">
-                    A visual journey through GRFC.
+                    A visual journey through Giant Robot Fight Club.
                 </p>
-                <a href="collections/202601GRFC/index.html" class="collection-link">
+                <a href="collections/202601GiantRobotFightClub/index.html" class="collection-link">
                     View Collection
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <line x1="5" y1="12" x2="19" y2="12"/>
@@ -92,10 +94,10 @@
             </div>
             <div class="collection-images">
                 <div class="collection-image primary">
-                    <img src="images/grid photos/202601GRFC-01.jpeg" alt="GRFC photograph">
+                    <img src="images/grid photos/202601GiantRobotFightClub-01.jpeg" alt="Giant Robot Fight Club photograph">
                 </div>
                 <div class="collection-image secondary">
-                    <img src="images/grid photos/202601GRFC-02.jpeg" alt="GRFC photograph">
+                    <img src="images/grid photos/202601GiantRobotFightClub-02.jpeg" alt="Giant Robot Fight Club photograph">
                 </div>
             </div>
         </section>
@@ -103,7 +105,6 @@
         <!-- Collection 2 -->
         <section class="collection-section" data-collection="japan">
             <div class="collection-content">
-                <span class="collection-number">02</span>
                 <h2 class="collection-title">Japan</h2>
                 <p class="collection-description">
                     A comprehensive journey through Japan. Ancient temples, modern cities,
@@ -130,7 +131,6 @@
         <!-- Collection 3 -->
         <section class="collection-section" data-collection="following-japan">
             <div class="collection-content">
-                <span class="collection-number">03</span>
                 <h2 class="collection-title">Following Japan</h2>
                 <p class="collection-description">
                     Candid moments following the rhythm of Japanese daily life.
@@ -157,7 +157,6 @@
         <!-- Collection 4 -->
         <section class="collection-section" data-collection="summer-in-nyc">
             <div class="collection-content">
-                <span class="collection-number">04</span>
                 <h2 class="collection-title">Summer in NYC</h2>
                 <p class="collection-description">
                     The city that never sleeps in its warmest season. Street life,
@@ -184,7 +183,6 @@
         <!-- Collection 5 -->
         <section class="collection-section" data-collection="bench-sitting">
             <div class="collection-content">
-                <span class="collection-number">05</span>
                 <h2 class="collection-title">Bench Sitting</h2>
                 <p class="collection-description">
                     Moments of pause and contemplation. People finding rest
@@ -234,6 +232,8 @@
 
         const splashScreen = document.getElementById('splashScreen');
         const splashImage = document.getElementById('splashImage');
+        const splashIntro = document.getElementById('splashIntro');
+        const splashSubtitle = document.getElementById('splashSubtitle');
 
         // Check if this is the first visit this session
         if (sessionStorage.getItem('splashShown')) {
@@ -244,8 +244,8 @@
 
         // Random images from collections (full quality for splash)
         const splashImages = [
-            'images/202601GRFC/202601GRFC-01.jpeg',
-            'images/202601GRFC/202601GRFC-05.jpeg',
+            'images/202601GiantRobotFightClub/202601GiantRobotFightClub-01.jpeg',
+            'images/202601GiantRobotFightClub/202601GiantRobotFightClub-05.jpeg',
             'images/202510Japan/202510Japan-01.jpeg',
             'images/202510Japan/202510Japan-08.jpeg',
             'images/202510Japan/202510Japan-15.jpeg',
@@ -271,15 +271,23 @@
         splashImage.onload = function() {
             splashImage.classList.add('loaded');
 
-            // Wait, then fade out
+            // After image shows, animate name to header and fade subtitle
             setTimeout(function() {
-                splashScreen.classList.add('fade-out');
+                // Animate intro to header position
+                splashIntro.classList.add('animate-to-header');
+                // Fade out subtitle
+                splashSubtitle.classList.add('fade-out');
 
-                // Remove from DOM after fade
+                // After animation completes, fade out splash screen
                 setTimeout(function() {
-                    splashScreen.classList.add('hidden');
-                }, 1200);
-            }, 4000); // Show for 4 seconds
+                    splashScreen.classList.add('fade-out');
+
+                    // Remove from DOM after fade
+                    setTimeout(function() {
+                        splashScreen.classList.add('hidden');
+                    }, 1200);
+                }, 1000); // Wait for name animation to complete
+            }, 3000); // Show centered text for 3 seconds
         };
 
         splashImage.src = randomImage;

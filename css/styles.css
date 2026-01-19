@@ -45,7 +45,8 @@ body.light-mode {
 }
 
 body.light-mode .site-header {
-    background: linear-gradient(to bottom, rgba(248, 248, 248, 0.95), transparent);
+    background: #f8f8f8;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
 }
 
 body.light-mode .hero-image::after {
@@ -93,21 +94,63 @@ body.light-mode .lightbox {
     opacity: 1;
 }
 
-.splash-logo {
+/* Splash intro text - centered initially */
+.splash-intro {
     position: absolute;
-    top: var(--spacing-md);
-    left: var(--spacing-lg);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2;
+    opacity: 0;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    background: rgba(128, 128, 128, 0.3);
+    backdrop-filter: blur(4px);
+    border-radius: 8px;
+    transition: all 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.splash-screen .splash-image.loaded ~ .splash-intro {
+    opacity: 1;
+}
+
+.splash-name {
     font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: clamp(2.5rem, 8vw, 5rem);
     font-weight: 400;
     letter-spacing: 0.02em;
     color: var(--color-text);
-    opacity: 0;
-    transition: opacity 0.8s ease-in;
+    margin-bottom: var(--spacing-sm);
+    transition: all 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-.splash-screen .splash-image.loaded ~ .splash-logo {
+.splash-subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(0.875rem, 2vw, 1.125rem);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
     opacity: 1;
+    transition: opacity 0.8s ease-out;
+}
+
+.splash-subtitle.fade-out {
+    opacity: 0;
+}
+
+/* Animate name to header position */
+.splash-intro.animate-to-header {
+    top: var(--spacing-md);
+    left: var(--spacing-lg);
+    transform: translate(0, 0);
+    text-align: left;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: transparent;
+    backdrop-filter: none;
+}
+
+.splash-intro.animate-to-header .splash-name {
+    font-size: 3rem;
 }
 
 /* ----- Reset & Base ----- */
@@ -181,7 +224,7 @@ h1, h2, h3 {
 
 .logo {
     font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: 3rem;
     font-weight: 400;
     letter-spacing: 0.02em;
     white-space: nowrap;
@@ -200,7 +243,7 @@ h1, h2, h3 {
 }
 
 .nav-links a {
-    font-size: 0.875rem;
+    font-size: 1.17rem;
     font-weight: 400;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -1624,6 +1667,7 @@ body.light-mode .theme-toggle .icon-sun {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 80px;
     background: var(--color-bg);
     opacity: 0;
     visibility: hidden;
@@ -1638,12 +1682,12 @@ body.light-mode .theme-toggle .icon-sun {
 .moment-photo-container {
     position: relative;
     max-width: 90vw;
-    max-height: 85vh;
+    max-height: calc(85vh - 80px);
 }
 
 .moment-photo {
     max-width: 100%;
-    max-height: 85vh;
+    max-height: calc(85vh - 80px);
     object-fit: contain;
     opacity: 0;
     animation: fadeIn 1.5s ease forwards;
@@ -1656,21 +1700,21 @@ body.light-mode .theme-toggle .icon-sun {
 /* Timer */
 .moment-timer {
     position: fixed;
-    bottom: var(--spacing-lg);
-    right: var(--spacing-lg);
+    top: 50%;
+    left: var(--spacing-lg);
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(-50%) translateX(-20px);
     transition: all 0.6s ease;
 }
 
 .moment-timer.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(-50%) translateX(0);
 }
 
 .moment-timer.complete {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(-50%) translateX(-20px);
 }
 
 .timer-ring {
@@ -1732,7 +1776,9 @@ body.light-mode .theme-toggle .icon-sun {
     font-family: var(--font-display);
     font-size: 1.5rem;
     font-style: italic;
-    color: var(--color-text-muted);
+    color: #ffffff;
+    background: #000000;
+    padding: var(--spacing-sm) var(--spacing-md);
     margin-bottom: var(--spacing-lg);
 }
 
@@ -1763,13 +1809,13 @@ body.light-mode .theme-toggle .icon-sun {
 }
 
 .moment-btn.secondary {
-    background: transparent;
-    color: var(--color-text);
+    background: var(--color-text);
+    color: var(--color-bg);
 }
 
 .moment-btn.secondary:hover {
-    background: var(--color-text);
-    color: var(--color-bg);
+    background: transparent;
+    color: var(--color-text);
 }
 
 /* Feedback Section */

@@ -129,7 +129,7 @@ body.light-mode .lightbox {
     font-size: clamp(0.875rem, 2vw, 1.125rem);
     font-weight: 300;
     letter-spacing: 0.1em;
-    color: var(--color-text-muted);
+    color: var(--color-text);
     opacity: 1;
     transition: opacity 0.8s ease-out;
 }
@@ -800,6 +800,68 @@ body.light-mode .theme-toggle .icon-sun {
     color: var(--color-text-subtle);
 }
 
+/* End of Collection Screen */
+.lightbox-end-screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    z-index: 10;
+    padding: var(--spacing-lg);
+}
+
+.lightbox.show-end-screen .lightbox-end-screen {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox.show-end-screen .lightbox-content {
+    opacity: 0;
+}
+
+.end-screen-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+}
+
+.end-screen-subtitle {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-lg);
+}
+
+.end-screen-collections {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    max-width: 800px;
+}
+
+.end-screen-collections .all-collections-item {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    transition: all var(--transition-fast);
+}
+
+.end-screen-collections .all-collections-item:hover {
+    color: var(--color-text);
+    border-color: var(--color-text);
+    background: var(--color-bg-subtle);
+}
+
 /* ----- Collection Navigation ----- */
 .collection-nav {
     display: grid;
@@ -1450,6 +1512,10 @@ body.light-mode .theme-toggle .icon-sun {
         padding: var(--spacing-sm) var(--spacing-md);
     }
 
+    .logo {
+        font-size: 2rem;
+    }
+
     .menu-toggle {
         display: flex;
     }
@@ -1875,8 +1941,7 @@ body.light-mode .theme-toggle .icon-sun {
 /* Responsive */
 @media (max-width: 768px) {
     .moment-timer {
-        bottom: var(--spacing-md);
-        right: var(--spacing-md);
+        left: var(--spacing-md);
     }
 
     .timer-ring {

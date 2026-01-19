@@ -184,23 +184,61 @@
         const lightboxTitle = lightbox.querySelector('.lightbox-title');
         const lightboxLocation = lightbox.querySelector('.lightbox-location');
         const lightboxCounter = lightbox.querySelector('.lightbox-counter');
+        const lightboxContent = lightbox.querySelector('.lightbox-content');
         const closeBtn = lightbox.querySelector('.lightbox-close');
         const prevBtn = lightbox.querySelector('.lightbox-prev');
         const nextBtn = lightbox.querySelector('.lightbox-next');
 
         let currentIndex = 0;
         const totalImages = galleryItems.length;
+        let showingEndScreen = false;
+
+        // Create end-of-collection screen
+        const endScreen = document.createElement('div');
+        endScreen.className = 'lightbox-end-screen';
+        endScreen.innerHTML = `
+            <h2 class="end-screen-title">End of Collection</h2>
+            <p class="end-screen-subtitle">Explore more collections</p>
+            <div class="end-screen-collections"></div>
+        `;
+        lightbox.appendChild(endScreen);
+
+        // Populate end screen with other collections
+        const populateEndScreen = () => {
+            const collectionsContainer = endScreen.querySelector('.end-screen-collections');
+            const allCollections = document.querySelectorAll('.all-collections-item:not(.current)');
+            collectionsContainer.innerHTML = '';
+            allCollections.forEach(link => {
+                const newLink = link.cloneNode(true);
+                collectionsContainer.appendChild(newLink);
+            });
+        };
+        populateEndScreen();
 
         const openLightbox = (index) => {
             currentIndex = index;
+            showingEndScreen = false;
             updateLightboxContent();
             lightbox.classList.add('active');
+            lightbox.classList.remove('show-end-screen');
             document.body.style.overflow = 'hidden';
         };
 
         const closeLightbox = () => {
             lightbox.classList.remove('active');
+            lightbox.classList.remove('show-end-screen');
+            showingEndScreen = false;
             document.body.style.overflow = '';
+        };
+
+        const showEndScreen = () => {
+            showingEndScreen = true;
+            lightbox.classList.add('show-end-screen');
+        };
+
+        const hideEndScreen = () => {
+            showingEndScreen = false;
+            lightbox.classList.remove('show-end-screen');
         };
 
         const updateLightboxContent = () => {
@@ -218,13 +256,23 @@
         };
 
         const showPrev = () => {
+            if (showingEndScreen) {
+                hideEndScreen();
+                return;
+            }
             currentIndex = (currentIndex - 1 + totalImages) % totalImages;
             updateLightboxContent();
         };
 
         const showNext = () => {
-            currentIndex = (currentIndex + 1) % totalImages;
-            updateLightboxContent();
+            if (showingEndScreen) return;
+
+            if (currentIndex === totalImages - 1) {
+                showEndScreen();
+            } else {
+                currentIndex = currentIndex + 1;
+                updateLightboxContent();
+            }
         };
 
         // Event Listeners
@@ -238,7 +286,7 @@
 
         // Close on background click
         lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
+            if (e.target === lightbox || e.target === endScreen) {
                 closeLightbox();
             }
         });

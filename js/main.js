@@ -241,18 +241,44 @@
             lightbox.classList.remove('show-end-screen');
         };
 
+        // Preload an image and cache it
+        const preloadCache = new Map();
+        const preloadImage = (src) => {
+            if (!src || preloadCache.has(src)) return;
+            const img = new Image();
+            img.src = src;
+            preloadCache.set(src, img);
+        };
+
+        // Preload adjacent images
+        const preloadAdjacent = () => {
+            const prevIndex = (currentIndex - 1 + totalImages) % totalImages;
+            const nextIndex = (currentIndex + 1) % totalImages;
+
+            const prevImg = galleryItems[prevIndex]?.querySelector('img');
+            const nextImg = galleryItems[nextIndex]?.querySelector('img');
+
+            if (prevImg) preloadImage(prevImg.dataset.fullSrc || prevImg.src);
+            if (nextImg) preloadImage(nextImg.dataset.fullSrc || nextImg.src);
+        };
+
         const updateLightboxContent = () => {
             const item = galleryItems[currentIndex];
             const img = item.querySelector('img');
             const title = item.querySelector('.photo-title');
             const location = item.querySelector('.photo-location');
 
-            // Use full resolution image if available, otherwise fall back to thumbnail
-            lightboxImage.src = img.dataset.fullSrc || img.src;
+            const fullSrc = img.dataset.fullSrc || img.src;
+
+            // Load full resolution image
+            lightboxImage.src = fullSrc;
             lightboxImage.alt = img.alt;
             lightboxTitle.textContent = title ? title.textContent : '';
             lightboxLocation.textContent = location ? location.textContent : '';
             lightboxCounter.textContent = `${currentIndex + 1} / ${totalImages}`;
+
+            // Preload adjacent images
+            preloadAdjacent();
         };
 
         const showPrev = () => {

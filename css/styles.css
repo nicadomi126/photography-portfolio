@@ -759,13 +759,17 @@ body.light-mode .theme-toggle .icon-sun {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    padding: var(--spacing-md);
-    color: var(--color-text-muted);
-    transition: color var(--transition-fast);
+    padding: var(--spacing-sm);
+    color: #ffffff;
+    background: rgba(128, 128, 128, 0.3);
+    backdrop-filter: blur(4px);
+    border-radius: 4px;
+    transition: all var(--transition-fast);
 }
 
 .lightbox-nav:hover {
-    color: var(--color-text);
+    color: #ffffff;
+    background: rgba(128, 128, 128, 0.5);
 }
 
 .lightbox-prev {
@@ -1654,10 +1658,6 @@ body.light-mode .theme-toggle .icon-sun {
     .article-footer {
         flex-direction: column;
         align-items: flex-start;
-    }
-
-    .lightbox-nav {
-        display: none;
     }
 }
 

@@ -197,8 +197,8 @@
         const endScreen = document.createElement('div');
         endScreen.className = 'lightbox-end-screen';
         endScreen.innerHTML = `
-            <h2 class="end-screen-title">End of Collection</h2>
-            <p class="end-screen-subtitle">Explore more collections</p>
+            <h2 class="end-screen-title">End of Adventure</h2>
+            <p class="end-screen-subtitle">Explore more adventures</p>
             <div class="end-screen-collections"></div>
         `;
         lightbox.appendChild(endScreen);

@@ -866,7 +866,7 @@ body.light-mode .theme-toggle .icon-sun {
 
 .end-screen-collections .all-collections-item {
     padding: var(--spacing-xs) var(--spacing-sm);
-    font-size: 0.875rem;
+    font-size: 1.17rem;
     color: var(--color-text-muted);
     border: 1px solid var(--color-border);
     border-radius: 4px;
@@ -877,6 +877,10 @@ body.light-mode .theme-toggle .icon-sun {
     color: var(--color-text);
     border-color: var(--color-text);
     background: var(--color-bg-subtle);
+}
+
+.end-screen-collections .all-collections-item::after {
+    content: '';
 }
 
 /* ----- Collection Navigation ----- */

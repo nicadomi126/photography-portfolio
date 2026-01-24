@@ -31,6 +31,30 @@
             z-index: 100;
         }
 
+        .wallpaper-item:hover img {
+            border: 2px solid #000;
+        }
+
+        .light-mode .wallpaper-item:hover img {
+            border: 2px solid #fff;
+        }
+
+        /* Ensure headers stay above hovered images */
+        .site-header {
+            z-index: 1000;
+        }
+
+        .collection-header {
+            position: relative;
+            z-index: 200;
+        }
+
+        /* Ensure header items align on same line */
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
+
         .wallpaper-item img {
             width: 100%;
             height: 100%;
@@ -84,7 +108,7 @@
             <a href="index.html" class="logo">Henry Solórzano</a>
             <div class="nav-links" id="navLinks">
                 <a href="other-collections.html">Adventures</a>
-                <a href="https://henrysolorzano.substack.com/" target="_blank" rel="noopener">Journal</a>
+                <a href="https://henrys-eye.ghost.io/" target="_blank" rel="noopener">Journal</a>
                 <a href="moment.html">Moment</a>
                 <a href="about.html">About</a>
             </div>
@@ -123,12 +147,12 @@
     <!-- Page Header -->
     <section class="collection-header">
         <div class="collection-header-content">
-            <a href="index.html" class="back-link">
+            <a href="other-collections.html" class="back-link">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <line x1="19" y1="12" x2="5" y2="12"/>
                     <polyline points="12 19 5 12 12 5"/>
                 </svg>
-                Back to Home
+                Back to Adventures
             </a>
             <h1 class="page-title">Wallpaper</h1>
             <p class="collection-intro">
@@ -183,18 +207,18 @@
         // Thumbnail images (resized) and their full-size originals - newest first
         const imageData = [
             // January 2026 - GRFC
-            { thumb: 'images/grid photos/202601GRFC-01.jpeg', full: 'images/202601GRFC/202601GRFC-01.jpeg' },
-            { thumb: 'images/grid photos/202601GRFC-02.jpeg', full: 'images/202601GRFC/202601GRFC-02.jpeg' },
-            { thumb: 'images/grid photos/202601GRFC-03.jpeg', full: 'images/202601GRFC/202601GRFC-03.jpeg' },
-            { thumb: 'images/grid photos/202601GRFC-04.jpeg', full: 'images/202601GRFC/202601GRFC-04.jpeg' },
-            { thumb: 'images/grid photos/202601GRFC-05.jpeg', full: 'images/202601GRFC/202601GRFC-05.jpeg' },
-            { thumb: 'images/grid photos/202601GRFC-06.jpeg', full: 'images/202601GRFC/202601GRFC-06.jpeg' },
-            { thumb: 'images/grid photos/202601GRFC-07.jpeg', full: 'images/202601GRFC/202601GRFC-07.jpeg' },
-            { thumb: 'images/grid photos/202601GRFC-08.jpeg', full: 'images/202601GRFC/202601GRFC-08.jpeg' },
-            { thumb: 'images/grid photos/202601GRFC-09.jpeg', full: 'images/202601GRFC/202601GRFC-09.jpeg' },
-            { thumb: 'images/grid photos/202601GRFC-10.jpeg', full: 'images/202601GRFC/202601GRFC-10.jpeg' },
-            { thumb: 'images/grid photos/202601GRFC-11.jpeg', full: 'images/202601GRFC/202601GRFC-11.jpeg' },
-            { thumb: 'images/grid photos/202601GRFC-12.jpeg', full: 'images/202601GRFC/202601GRFC-12.jpeg' },
+            { thumb: 'images/grid photos/202601GiantRobotFightClub-01.jpeg', full: 'images/202601GiantRobotFightClub/202601GiantRobotFightClub-01.jpeg' },
+            { thumb: 'images/grid photos/202601GiantRobotFightClub-02.jpeg', full: 'images/202601GiantRobotFightClub/202601GiantRobotFightClub-02.jpeg' },
+            { thumb: 'images/grid photos/202601GiantRobotFightClub-03.jpeg', full: 'images/202601GiantRobotFightClub/202601GiantRobotFightClub-03.jpeg' },
+            { thumb: 'images/grid photos/202601GiantRobotFightClub-04.jpeg', full: 'images/202601GiantRobotFightClub/202601GiantRobotFightClub-04.jpeg' },
+            { thumb: 'images/grid photos/202601GiantRobotFightClub-05.jpeg', full: 'images/202601GiantRobotFightClub/202601GiantRobotFightClub-05.jpeg' },
+            { thumb: 'images/grid photos/202601GiantRobotFightClub-06.jpeg', full: 'images/202601GiantRobotFightClub/202601GiantRobotFightClub-06.jpeg' },
+            { thumb: 'images/grid photos/202601GiantRobotFightClub-07.jpeg', full: 'images/202601GiantRobotFightClub/202601GiantRobotFightClub-07.jpeg' },
+            { thumb: 'images/grid photos/202601GiantRobotFightClub-08.jpeg', full: 'images/202601GiantRobotFightClub/202601GiantRobotFightClub-08.jpeg' },
+            { thumb: 'images/grid photos/202601GiantRobotFightClub-09.jpeg', full: 'images/202601GiantRobotFightClub/202601GiantRobotFightClub-09.jpeg' },
+            { thumb: 'images/grid photos/202601GiantRobotFightClub-10.jpeg', full: 'images/202601GiantRobotFightClub/202601GiantRobotFightClub-10.jpeg' },
+            { thumb: 'images/grid photos/202601GiantRobotFightClub-11.jpeg', full: 'images/202601GiantRobotFightClub/202601GiantRobotFightClub-11.jpeg' },
+            { thumb: 'images/grid photos/202601GiantRobotFightClub-12.jpeg', full: 'images/202601GiantRobotFightClub/202601GiantRobotFightClub-12.jpeg' },
             // October 2025 - Japan
             { thumb: 'images/grid photos/202510Japan-01.jpeg', full: 'images/202510Japan/202510Japan-01.jpeg' },
             { thumb: 'images/grid photos/202510Japan-02.jpeg', full: 'images/202510Japan/202510Japan-02.jpeg' },

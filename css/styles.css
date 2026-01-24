@@ -227,15 +227,15 @@ h1, h2, h3 {
 .nav-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     max-width: var(--max-width);
     margin: 0 auto;
 }
 
 .logo {
     font-family: var(--font-display);
-    font-size: 2rem;
-    font-weight: 400;
+    font-size: clamp(1.8rem, 4vw, 3.1rem);
+    font-weight: 600;
     letter-spacing: 0.02em;
     white-space: nowrap;
     margin-right: var(--spacing-md);
@@ -260,7 +260,7 @@ h1, h2, h3 {
 }
 
 .nav-links a {
-    font-size: 1.17rem;
+    font-size: clamp(0.85rem, 1.5vw, 1.17rem);
     font-weight: 400;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -1606,7 +1606,7 @@ body.light-mode .theme-toggle .icon-sun {
     }
 
     .logo {
-        font-size: 1.33rem;
+        font-size: clamp(1.5rem, 5vw, 2rem);
     }
 
     .nav-actions {
@@ -1882,8 +1882,8 @@ body.light-mode .theme-toggle .icon-sun {
     font-family: var(--font-display);
     font-size: 1.5rem;
     font-style: italic;
-    color: #ffffff;
-    background: #000000;
+    color: var(--color-text);
+    background: var(--color-bg);
     padding: var(--spacing-sm) var(--spacing-md);
     margin-bottom: var(--spacing-lg);
 }

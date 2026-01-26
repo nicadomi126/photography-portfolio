@@ -1981,7 +1981,17 @@ body.light-mode .theme-toggle .icon-sun {
 /* Responsive */
 @media (max-width: 768px) {
     .moment-timer {
-        left: var(--spacing-md);
+        top: calc(80px + var(--spacing-md));
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .moment-timer.visible {
+        transform: translateX(-50%);
+    }
+
+    .moment-timer.complete {
+        transform: translateX(-50%) translateY(-20px);
     }
 
     .timer-ring {

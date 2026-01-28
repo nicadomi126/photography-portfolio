@@ -5,17 +5,17 @@ const path = require('path');
 const IMAGES_DIR = path.join(__dirname, '..', 'images');
 const OPTIMIZED_DIR = path.join(__dirname, '..', 'images-optimized');
 
-// Configuration
+// Configuration - WebP format for optimal compression
 const CONFIG = {
   // Main gallery image (what users see in the grid)
   gallery: {
     width: 1200,
-    quality: 80,
+    quality: 82,
   },
   // Full-size for lightbox viewing
   full: {
-    width: 2400,
-    quality: 85,
+    width: 4000,
+    quality: 95,
   },
   // Thumbnail for faster initial load
   thumb: {
@@ -65,30 +65,30 @@ async function optimizeImage(inputPath, outputDir) {
   let totalOptimized = 0;
 
   // Gallery size (main display)
-  const galleryPath = path.join(targetDir, `${baseName}.jpg`);
+  const galleryPath = path.join(targetDir, `${baseName}.webp`);
   await sharp(inputPath)
     .resize(CONFIG.gallery.width, null, { withoutEnlargement: true })
-    .jpeg({ quality: CONFIG.gallery.quality, progressive: true })
+    .webp({ quality: CONFIG.gallery.quality })
     .toFile(galleryPath);
   const gallerySize = fs.statSync(galleryPath).size;
   totalOptimized += gallerySize;
   console.log(`  Gallery: ${(gallerySize / 1024).toFixed(0)} KB`);
 
   // Full size (lightbox)
-  const fullPath = path.join(targetDir, `${baseName}-full.jpg`);
+  const fullPath = path.join(targetDir, `${baseName}-full.webp`);
   await sharp(inputPath)
     .resize(CONFIG.full.width, null, { withoutEnlargement: true })
-    .jpeg({ quality: CONFIG.full.quality, progressive: true })
+    .webp({ quality: CONFIG.full.quality })
     .toFile(fullPath);
   const fullSize = fs.statSync(fullPath).size;
   totalOptimized += fullSize;
   console.log(`  Full: ${(fullSize / 1024).toFixed(0)} KB`);
 
   // Thumbnail
-  const thumbPath = path.join(targetDir, `${baseName}-thumb.jpg`);
+  const thumbPath = path.join(targetDir, `${baseName}-thumb.webp`);
   await sharp(inputPath)
     .resize(CONFIG.thumb.width, null, { withoutEnlargement: true })
-    .jpeg({ quality: CONFIG.thumb.quality, progressive: true })
+    .webp({ quality: CONFIG.thumb.quality })
     .toFile(thumbPath);
   const thumbSize = fs.statSync(thumbPath).size;
   totalOptimized += thumbSize;
@@ -132,11 +132,11 @@ async function main() {
   if (!isDryRun) {
     console.log(`  Optimized total: ${(totalOptimized / 1024 / 1024).toFixed(2)} MB`);
     console.log(`  Savings: ${((1 - totalOptimized / totalOriginal) * 100).toFixed(1)}%`);
-    console.log(`\nOptimized images saved to: ${OPTIMIZED_DIR}`);
+    console.log(`\nOptimized WebP images saved to: ${OPTIMIZED_DIR}`);
     console.log('\nNext steps:');
     console.log('1. Review the optimized images in images-optimized/');
     console.log('2. If satisfied, replace images/ with images-optimized/');
-    console.log('3. Update HTML to use the new image naming convention');
+    console.log('3. Update HTML to use .webp extension (e.g., photo.webp, photo-full.webp)');
   }
 }
 

@@ -7,6 +7,6 @@
     "optimize:dry": "node scripts/optimize-images.js --dry-run"
   },
   "dependencies": {
-    "sharp": "^0.33.2"
+    "sharp": "^0.33.5"
   }
 }

@@ -128,7 +128,7 @@
         collections.forEach(collection => {
             for (let i = 1; i <= collection.count; i++) {
                 const num = i.toString().padStart(2, '0');
-                photos.push(`images/${collection.folder}/resized/${collection.prefix}-${num}.jpeg`);
+                photos.push(`images-optimized/${collection.folder}/resized/${collection.prefix}-${num}.webp`);
             }
         });
 
@@ -206,7 +206,7 @@
 
             // Fallback if image fails to load
             photo.onerror = () => {
-                photo.src = 'images/202404Montreal/resized/202404Montreal-01.jpeg'; // fallback image
+                photo.src = 'images-optimized/202404Montreal/resized/202404Montreal-01.webp'; // fallback image
             };
         };
 

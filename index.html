@@ -562,6 +562,9 @@
             { thumb: 'images-optimized/grid photos/202404Montreal-08.webp', full: 'images-optimized/202404Montreal/resized/202404Montreal-08.webp' }
         ];
 
+        // Only show the latest 100 photos
+        const displayData = imageData.slice(0, 100);
+
         const grid = document.getElementById('wallpaperGrid');
         const items = [];
         const visibleItems = new Set(); // Track visible items for wave effect
@@ -580,9 +583,9 @@
 
         // Create a batch of image elements
         function createImageBatch(startIndex, count) {
-            const endIndex = Math.min(startIndex + count, imageData.length);
+            const endIndex = Math.min(startIndex + count, displayData.length);
             for (let index = startIndex; index < endIndex; index++) {
-                const data = imageData[index];
+                const data = displayData[index];
                 const item = document.createElement('div');
                 item.className = 'wallpaper-item';
                 item.dataset.index = index;
@@ -622,7 +625,7 @@
         // Observer to load more images when scrolling near bottom
         const loadMoreObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && loadedCount < imageData.length) {
+                if (entry.isIntersecting && loadedCount < displayData.length) {
                     createImageBatch(loadedCount, BATCH_SIZE);
                     // Move sentinel to end
                     grid.appendChild(loadMoreSentinel);
@@ -656,13 +659,13 @@
         function loadImage(index) {
             const newImg = new Image();
             newImg.onload = () => {
-                lightboxImage.src = imageData[index].full;
+                lightboxImage.src = displayData[index].full;
             };
-            newImg.src = imageData[index].full;
-            lightboxCounter.textContent = `${index + 1} / ${imageData.length}`;
+            newImg.src = displayData[index].full;
+            lightboxCounter.textContent = `${index + 1} / ${displayData.length}`;
 
             // Update collection link
-            const collection = getCollectionFromPath(imageData[index].full);
+            const collection = getCollectionFromPath(displayData[index].full);
             if (collection) {
                 lightboxCollectionLink.href = collection.url;
                 lightboxCollectionLink.textContent = collection.name;
@@ -672,22 +675,22 @@
             }
 
             // Preload adjacent images
-            preloadImage((index + 1) % imageData.length);
-            preloadImage((index - 1 + imageData.length) % imageData.length);
+            preloadImage((index + 1) % displayData.length);
+            preloadImage((index - 1 + displayData.length) % displayData.length);
         }
 
         function preloadImage(index) {
             const img = new Image();
-            img.src = imageData[index].full;
+            img.src = displayData[index].full;
         }
 
         function nextImage() {
-            currentIndex = (currentIndex + 1) % imageData.length;
+            currentIndex = (currentIndex + 1) % displayData.length;
             loadImage(currentIndex);
         }
 
         function prevImage() {
-            currentIndex = (currentIndex - 1 + imageData.length) % imageData.length;
+            currentIndex = (currentIndex - 1 + displayData.length) % displayData.length;
             loadImage(currentIndex);
         }
 

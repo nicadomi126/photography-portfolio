@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         .wallpaper-grid {
@@ -199,7 +200,7 @@
             </div>
         </div>
         <div class="hero-image">
-            <img src="images-optimized/hero.webp" alt="Featured photograph">
+            <img src="images-optimized/hero.webp" alt="Featured photograph" width="1200" height="800">
         </div>
     </section>
 
@@ -301,9 +302,9 @@
                         // Remove from DOM after fade
                         setTimeout(function() {
                             splashScreen.classList.add('hidden');
-                        }, 1200);
-                    }, 1000); // Wait for name animation to complete
-                }, 3000); // Show centered text for 3 seconds
+                        }, 1000);
+                    }, 500); // Wait for name animation to complete
+                }, 1500); // Show centered text for 1.5 seconds
             };
 
             splashImage.src = randomImage;
@@ -563,6 +564,9 @@
 
         const grid = document.getElementById('wallpaperGrid');
         const items = [];
+        const visibleItems = new Set(); // Track visible items for wave effect
+        const BATCH_SIZE = 40; // Load 40 images at a time
+        let loadedCount = 0;
 
         // Lightbox elements
         const lightbox = document.getElementById('lightbox');
@@ -574,24 +578,67 @@
         const lightboxNext = document.getElementById('lightboxNext');
         let currentIndex = 0;
 
-        // Create image elements
-        imageData.forEach((data, index) => {
-            const item = document.createElement('div');
-            item.className = 'wallpaper-item';
-            item.dataset.index = index;
+        // Create a batch of image elements
+        function createImageBatch(startIndex, count) {
+            const endIndex = Math.min(startIndex + count, imageData.length);
+            for (let index = startIndex; index < endIndex; index++) {
+                const data = imageData[index];
+                const item = document.createElement('div');
+                item.className = 'wallpaper-item';
+                item.dataset.index = index;
 
-            const img = document.createElement('img');
-            img.src = data.thumb;
-            img.alt = 'Photo ' + (index + 1);
-            img.loading = 'lazy';
+                const img = document.createElement('img');
+                img.src = data.thumb;
+                img.alt = 'Photo ' + (index + 1);
+                img.loading = 'lazy';
+                img.width = 150;
+                img.height = 150;
 
-            // Click to open lightbox
-            item.addEventListener('click', () => openLightbox(index));
+                // Click to open lightbox
+                item.addEventListener('click', () => openLightbox(index));
 
-            item.appendChild(img);
-            grid.appendChild(item);
-            items.push({ element: item, img: img });
-        });
+                item.appendChild(img);
+                grid.appendChild(item);
+                items.push({ element: item, img: img, index: index });
+
+                // Observe this item for visibility (wave effect optimization)
+                visibilityObserver.observe(item);
+            }
+            loadedCount = endIndex;
+        }
+
+        // Observer to track which items are visible (for wave effect)
+        const visibilityObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const index = parseInt(entry.target.dataset.index);
+                if (entry.isIntersecting) {
+                    visibleItems.add(index);
+                } else {
+                    visibleItems.delete(index);
+                }
+            });
+        }, { rootMargin: '100px' });
+
+        // Observer to load more images when scrolling near bottom
+        const loadMoreObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && loadedCount < imageData.length) {
+                    createImageBatch(loadedCount, BATCH_SIZE);
+                    // Move sentinel to end
+                    grid.appendChild(loadMoreSentinel);
+                }
+            });
+        }, { rootMargin: '500px' });
+
+        // Create sentinel element for infinite scroll
+        const loadMoreSentinel = document.createElement('div');
+        loadMoreSentinel.style.height = '1px';
+        loadMoreSentinel.style.gridColumn = '1 / -1';
+
+        // Load initial batch
+        createImageBatch(0, BATCH_SIZE);
+        grid.appendChild(loadMoreSentinel);
+        loadMoreObserver.observe(loadMoreSentinel);
 
         // Lightbox functions
         function openLightbox(index) {
@@ -663,7 +710,7 @@
             if (e.key === 'ArrowLeft') prevImage();
         });
 
-        // Wave effect on mouse move
+        // Wave effect on mouse move (optimized for visible items only)
         let mouseX = 0;
         let mouseY = 0;
         let rafId = null;
@@ -680,7 +727,12 @@
         function updateWave() {
             rafId = null;
 
-            items.forEach(({ element, img }) => {
+            // Only process visible items for better performance
+            items.forEach(({ element, img, index }) => {
+                if (!visibleItems.has(index)) {
+                    return; // Skip items not currently visible
+                }
+
                 const rect = element.getBoundingClientRect();
                 const itemCenterX = rect.left + rect.width / 2;
                 const itemCenterY = rect.top + rect.height / 2;

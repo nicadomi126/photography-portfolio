@@ -219,7 +219,7 @@ h1, h2, h3 {
     left: 0;
     right: 0;
     z-index: 100;
-    padding: 1.33rem 2.67rem;
+    padding: clamp(0.75rem, 1.5vw, 1.33rem) clamp(1rem, 3vw, 2.67rem);
     background: linear-gradient(to bottom, rgba(10, 10, 10, 0.95), transparent);
     transition: background var(--transition-medium);
 }
@@ -249,14 +249,15 @@ h1, h2, h3 {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: var(--spacing-lg);
+    gap: clamp(1.5rem, 2.5vw, 4rem);
 }
 
 .nav-actions {
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
-    margin-left: var(--spacing-lg);
+    margin-left: clamp(1rem, 2vw, 4rem);
+    flex-shrink: 0;
 }
 
 .nav-links a {
@@ -1520,21 +1521,48 @@ body.light-mode .theme-toggle .icon-sun {
     }
 }
 
+@media (max-width: 1200px) {
+    .nav-links {
+        gap: clamp(1rem, 2vw, 2rem);
+    }
+
+    .nav-links a {
+        font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+    }
+
+    .logo {
+        font-size: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    .nav-actions {
+        margin-left: var(--spacing-md);
+    }
+}
+
 @media (max-width: 1024px) {
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
     .nav-links {
-        gap: var(--spacing-md);
+        gap: clamp(0.75rem, 1.5vw, 1.5rem);
     }
 
     .nav-links a {
-        font-size: 0.95rem;
+        font-size: clamp(0.7rem, 1.1vw, 0.85rem);
+    }
+
+    .logo {
+        font-size: clamp(1.4rem, 2.5vw, 2rem);
     }
 
     .nav-actions {
-        margin-left: var(--spacing-md);
+        margin-left: var(--spacing-sm);
+        gap: var(--spacing-xs);
+    }
+
+    .site-header {
+        padding: 1rem 1.5rem;
     }
 }
 
@@ -1703,6 +1731,9 @@ body.light-mode .theme-toggle .icon-sun {
     justify-content: center;
     background: var(--color-bg);
     z-index: 10;
+    padding-top: 80px;
+    padding-bottom: var(--spacing-lg);
+    overflow-y: auto;
     transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
@@ -1715,6 +1746,7 @@ body.light-mode .theme-toggle .icon-sun {
     text-align: center;
     max-width: 500px;
     padding: var(--spacing-lg);
+    margin: auto;
 }
 
 .moment-title {

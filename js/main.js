@@ -165,9 +165,11 @@
             if (scrollY > 100) {
                 header.style.background = bgColor;
                 header.style.backdropFilter = isLight ? 'none' : 'blur(10px)';
+                header.classList.add('scrolled');
             } else {
                 header.style.background = gradientBg;
                 header.style.backdropFilter = 'none';
+                header.classList.remove('scrolled');
             }
 
             lastScroll = scrollY;

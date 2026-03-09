@@ -233,7 +233,21 @@ h1, h2, h3 {
     z-index: 100;
     padding: clamp(0.75rem, 1.5vw, 1.33rem) clamp(1rem, 3vw, 2.67rem);
     background: linear-gradient(to bottom, rgba(10, 10, 10, 0.95), transparent);
-    transition: background var(--transition-medium);
+    transition: background var(--transition-medium), padding var(--transition-medium);
+}
+
+/* Compact header on scroll */
+.site-header.scrolled {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.site-header.scrolled .logo {
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+}
+
+.site-header.scrolled .nav-links a {
+    font-size: clamp(0.7rem, 1.2vw, 0.95rem);
 }
 
 .nav-container {
@@ -251,7 +265,7 @@ h1, h2, h3 {
     letter-spacing: 0.02em;
     white-space: nowrap;
     margin-right: var(--spacing-md);
-    transition: opacity var(--transition-fast);
+    transition: opacity var(--transition-fast), font-size var(--transition-medium);
 }
 
 .logo:hover {
@@ -278,7 +292,7 @@ h1, h2, h3 {
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--color-text-muted);
-    transition: color var(--transition-fast);
+    transition: color var(--transition-fast), font-size var(--transition-medium);
 }
 
 .nav-links a:hover,

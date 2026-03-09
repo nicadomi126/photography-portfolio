@@ -40,6 +40,18 @@
 
     let updateHeaderCallback = null;
 
+    // Update favicon based on current theme
+    const updateFavicon = (isLight) => {
+        const favicon = document.querySelector('link[rel="icon"]');
+        if (!favicon) return;
+
+        // Determine base path (handle collection pages in subdirectories)
+        const depth = (window.location.pathname.match(/\//g) || []).length - 1;
+        const basePath = depth > 1 ? '../../' : '';
+
+        favicon.href = isLight ? `${basePath}favicon-light.svg` : `${basePath}favicon-dark.svg`;
+    };
+
     const initThemeToggle = () => {
         const themeToggle = document.getElementById('themeToggle');
         if (!themeToggle) return;
@@ -48,6 +60,9 @@
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'light') {
             document.body.classList.add('light-mode');
+            updateFavicon(true);
+        } else {
+            updateFavicon(false);
         }
 
         themeToggle.addEventListener('click', () => {
@@ -56,6 +71,9 @@
             // Save preference
             const isLight = document.body.classList.contains('light-mode');
             localStorage.setItem('theme', isLight ? 'light' : 'dark');
+
+            // Update favicon
+            updateFavicon(isLight);
 
             // Immediately update header colors
             if (updateHeaderCallback) {

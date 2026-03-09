@@ -57,6 +57,18 @@ body.light-mode .lightbox {
     background: rgba(248, 248, 248, 0.98);
 }
 
+body.light-mode .lightbox-info {
+    color: var(--color-text);
+}
+
+body.light-mode .lightbox-nav {
+    color: #1a1a1a;
+}
+
+body.light-mode .lightbox-nav:hover {
+    color: #1a1a1a;
+}
+
 /* ----- Splash Screen ----- */
 .splash-screen {
     position: fixed;
@@ -805,21 +817,34 @@ body.light-mode .theme-toggle .icon-sun {
     font-family: var(--font-display);
     font-size: 1.5rem;
     margin-bottom: 4px;
+    color: #ffffff;
+}
+
+body.light-mode .lightbox-title {
+    color: #1a1a1a;
 }
 
 .lightbox-location {
     display: block;
     font-size: 0.75rem;
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.7);
     letter-spacing: 0.1em;
     text-transform: uppercase;
+}
+
+body.light-mode .lightbox-location {
+    color: #666666;
 }
 
 .lightbox-counter {
     display: block;
     margin-top: var(--spacing-sm);
     font-size: 0.75rem;
-    color: var(--color-text-subtle);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+body.light-mode .lightbox-counter {
+    color: #999999;
 }
 
 /* End of Collection Screen */
